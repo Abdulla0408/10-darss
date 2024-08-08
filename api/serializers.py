@@ -2,33 +2,33 @@ from rest_framework.serializers import ModelSerializer
 from landing.models import Service, Portfolio, Testimonial, BlogPost, Contact
 
 
-class ServiceSerializers(ModelSerializer):
+class ServiceSerializer(ModelSerializer):
     class Meta:
-        models = Service
+        model = Service
         fields = '__all__'
 
 
-class PortfolioSerializers(ModelSerializer):
+class PortfolioSerializer(ModelSerializer):
     class Meta:
-        models = Portfolio
+        model = Portfolio
         fields = '__all__'
 
 
-class TestimonialSerializers(ModelSerializer):
+class TestimonialSerializer(ModelSerializer):
     class Meta:
-        models = Testimonial
+        model = Testimonial
         fields = '__all__'
 
 
-class BlogPostSerializers(ModelSerializer):
+class BlogPostSerializer(ModelSerializer):
     class Meta:
-        models = BlogPost
+        model = BlogPost
         fields = '__all__'
 
 
-class ContactSerializers(ModelSerializer):
+class ContactSerializer(ModelSerializer):
     class Meta:
-        models = Contact
+        model = Contact
         fields = '__all__'
 
 

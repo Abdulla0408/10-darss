@@ -1,22 +1,22 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ServiceSerializers, PortfolioSerializers, TestimonialSerializers, BlogPostSerializers, ContactSerializers
+from .serializers import ServiceSerializer, PortfolioSerializer, TestimonialSerializer, BlogPostSerializer,ContactSerializer
 from landing.models import Service, Portfolio, Testimonial, BlogPost, Contact
 
 
 # Write API for service_list and service_detail functions
 @api_view(['GET'])
 def service_list(request):
-    service = Service.objects.all()
-    serializer_data = ServiceSerializers(service, many=True)
-    return Response(serializer_data.data)
+    services = Service.objects.all()
+    serializer = ServiceSerializer(services, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
 def service_detail(request, id):
     try:
         service = Service.objects.get(id=id)
-        serializer = ServiceSerializers(service)
+        serializer = ServiceSerializer(service)
         return Response(serializer.data)
     except Service.DoesNotExist:
         return Response({"error": "Service not found"}, status=404)
@@ -28,14 +28,14 @@ def service_detail(request, id):
 @api_view(['GET'])
 def portfolio_list(request):
     portfolio = Portfolio.objects.all()
-    serializer_data = PortfolioSerializers(portfolio, many=True)
+    serializer_data = PortfolioSerializer(portfolio, many=True)
     return Response(serializer_data.data)
 
 
 @api_view(['GET'])
 def portfolio_detail(request, id):
-    portfolio = Portfolio.objects.get(id = id)
-    serializer_data = PortfolioSerializers(portfolio).data
+    portfolio = Portfolio.objects.get(id=id)
+    serializer_data = PortfolioSerializer(portfolio).data
     return Response(serializer_data)
 
 
@@ -43,14 +43,14 @@ def portfolio_detail(request, id):
 @api_view(['GET'])
 def testimonial_list(request):
     testimonial = Testimonial.objects.all()
-    serializer_data = TestimonialSerializers(testimonial, many=True)
+    serializer_data = TestimonialSerializer(testimonial, many=True)
     return Response(serializer_data.data)
 
 
 @api_view(['GET'])
 def testimonial_detail(request, id):
     testimonial = Testimonial.objects.get(id=id)
-    serializer_data = TestimonialSerializers(testimonial).data
+    serializer_data = TestimonialSerializer(testimonial).data
     return Response(serializer_data)
 
 
@@ -58,14 +58,14 @@ def testimonial_detail(request, id):
 @api_view(['GET'])
 def blog_post_list(request):
     blog_post = BlogPost.objects.all()
-    serializer_data = BlogPostSerializers(blog_post, many=True)
+    serializer_data = BlogPostSerializer(blog_post, many=True)
     return Response(serializer_data.data)
 
 
 @api_view(['GET'])
 def blog_post_detail(request, id):
     blog_post = BlogPost.objects.get(id=id)
-    serializer_data = BlogPostSerializers(blog_post).data
+    serializer_data = BlogPostSerializer(blog_post).data
     return Response(serializer_data)
 
 
@@ -73,12 +73,12 @@ def blog_post_detail(request, id):
 # Write API for contact_list and contact_detail functions
 def contact_list(request):
     contact = Contact.objects.all()
-    serializer_data = ContactSerializers(contact, many=True)
+    serializer_data = ContactSerializer(contact, many=True)
     return Response(serializer_data.data)
 
 
 @api_view(['GET'])
 def contact_detail(request, id):
     contact = Contact.objects.all(id=id)
-    serializer_data = ContactSerializers(contact).data
+    serializer_data = ContactSerializer(contact).data
     return Response(serializer_data)
